@@ -10,6 +10,7 @@ export interface IUser extends Document {
   forgotPasswordTokenExpiry?: Date;
   verifyToken?: string;
   verifyTokenExpiry?: Date;
+  role?: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -43,6 +44,7 @@ const userSchema = new Schema<IUser>(
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
+    role: { type: String, enum: ["user", "admin"], default: "user" }
   },
   
 );
