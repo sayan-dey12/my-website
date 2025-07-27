@@ -19,6 +19,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Loader2 } from "lucide-react"
 import { useAuth } from '@/context/AuthContext';
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const { setLoggedIn } = useAuth();
@@ -27,6 +28,19 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [showResend, setShowResend] = useState(false); // ⬅️ New
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [callbackUrl, setCallbackUrl] = useState("/");
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cb = params.get("callbackUrl") || "/";
+    setCallbackUrl(cb);
+    console.log("✅ Callback URL:", cb);
+  }, []);
+
+  
+
+  
+  
 
   useEffect(() => {
     setMounted(true);
@@ -46,7 +60,8 @@ export default function Login() {
       const response = await axios.post('/api/auth/login', form);
       console.log("Successfully Logged in", response.data);
       setLoggedIn(true);
-      router.push("/");
+      console.log("Callback URL:", callbackUrl);
+      router.push(callbackUrl); 
       toast.success("Successfully Logged in!");
     } catch (error: any) {
       console.log("Login failed", error.response?.data?.message || error.message);

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 
@@ -13,6 +13,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const { loggedIn, setLoggedIn } = useAuth(); 
   const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,23 +37,27 @@ export default function Navbar() {
     }
   };
 
+  const handleComingSoon = () => {
+    toast("🚧 Feature coming soon!");
+  };
+
   if (!mounted) return null;
 
   return (
     <nav className="w-full bg-white dark:bg-gray-900 border-b shadow-sm z-50 relative">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-blue-600">
-          MySite
+        <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
+          Sayan Dey
         </Link>
 
         {/* Desktop menu */}
         <div className="hidden md:flex items-center space-x-4">
           <Link href="/blogs" className="hover:underline">Blogs</Link>
-          <Link href="/projects" className="hover:underline">Projects</Link>
-          <Link href="/video" className="hover:underline">Video Call</Link>
+          <button onClick={handleComingSoon} className="hover:underline">Projects</button>
+          <button onClick={handleComingSoon} className="hover:underline">Video Call</button>
 
           {!loggedIn ? (
-            <Link href="/login">
+            <Link href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}>
               <Button>Login</Button>
             </Link>
           ) : (
@@ -78,11 +83,11 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden px-4 py-4 bg-white dark:bg-gray-900 shadow-md space-y-3">
           <Link href="/blogs" className="block" onClick={() => setMenuOpen(false)}>Blogs</Link>
-          <Link href="/projects" className="block" onClick={() => setMenuOpen(false)}>Projects</Link>
-          <Link href="/video" className="block" onClick={() => setMenuOpen(false)}>Video Call</Link>
+          <button onClick={() => { handleComingSoon(); setMenuOpen(false); }} className="block">Projects</button>
+          <button onClick={() => { handleComingSoon(); setMenuOpen(false); }} className="block">Video Call</button>
 
           {!loggedIn ? (
-            <Link href="/login" onClick={() => setMenuOpen(false)}>
+            <Link href={`/login?callbackUrl=${encodeURIComponent(pathname)}`} onClick={() => setMenuOpen(false)}>
               <Button className="w-auto px-4 py-2 text-sm md:w-full">Login</Button>
             </Link>
           ) : (

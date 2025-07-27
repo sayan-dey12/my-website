@@ -10,6 +10,10 @@ const blogSchema = new mongoose.Schema(
     excerpt: String,
     coverImage: String,
     tags: [String],
+    images: {
+      type: [String],
+      default: [],
+    },
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],

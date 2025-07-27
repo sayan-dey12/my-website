@@ -1,81 +1,166 @@
 'use client';
 
-import { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { useRouter } from 'next/navigation';
+import { useState , useEffect} from 'react';
+import dynamic from 'next/dynamic';
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { commands as rawCommands, ICommand } from '@uiw/react-md-editor';
+import { useRouter } from 'next/navigation';
 
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 
-export default function SubmitBlogPage() {
-  const [form, setForm] = useState({
-    title: '',
-    slug: '',
-    excerpt: '',
-    content: '',
-    coverImage: '',
-    tags: '',
-    category: ''
-  });
-  const router = useRouter();
+const imageCommand: ICommand = {
+  name: 'image',
+  keyCommand: 'image',
+  buttonProps: { 'aria-label': 'Add image' },
+  icon: (
+    <svg width="12" height="12" viewBox="0 0 20 20">
+      <path d="M4 4h12v12H4z" fill="none" stroke="currentColor" strokeWidth="2" />
+      <circle cx="8" cy="8" r="2" fill="currentColor" />
+      <path d="M4 16l4-5 3 4 5-6 2 2v5z" fill="currentColor" />
+    </svg>
+  ),
+  execute: async (state: any, api: { replaceSelection: (text: string) => void }) => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.click();
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+    fileInput.onchange = async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
 
+      const formData = new FormData();
+      formData.append('file', file);
 
-const handleSubmit = async (e: any) => {
-  e.preventDefault();
-  try {
-    const res = await axios.post('/api/blog/submit', form);
-
-    toast.success('Blog submitted for review!');
-    router.push('/blogs');
-  } catch (err: any) {
-    const message = err.response?.data?.message || err.message || 'Something went wrong';
-    toast.error(message);
-  }
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+        api.replaceSelection(`![image](${data.url})`);
+        toast.success('Image uploaded');
+      } catch {
+        toast.error('Image upload failed');
+      }
+    };
+  },
 };
 
+export default function BlogSubmitPage() {
+  const router = useRouter();
+
+  const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
+  const [excerpt, setExcerpt] = useState('');
+  const [tags, setTags] = useState('');
+  const [content, setContent] = useState('**Write your blog here...**');
+  const [coverImage, setCoverImage] = useState<File | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+      setMounted(true);
+    }, []);
+  
+    if (!mounted) return null; // Prevent hydration mismatch
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!title || !content || !slug || !excerpt || !coverImage) {
+      toast.error('All fields are required');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('slug', slug);
+    formData.append('excerpt', excerpt);
+    formData.append('tags', tags);
+    formData.append('content', content);
+    formData.append('coverImage', coverImage);
+
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/blog/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Submit failed');
+
+      toast.success('Blog submitted');
+      router.push('/blogs'); // ✅ Redirect to blog listing or dashboard
+    } catch {
+      toast.error('Submit failed');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Submit a Blog</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="title">Title</Label>
-          <Input name="title" value={form.title} onChange={handleChange} required />
-        </div>
-        <div>
-          <Label htmlFor="slug">Slug (URL)</Label>
-          <Input name="slug" value={form.slug} onChange={handleChange} required />
-        </div>
-        <div>
-          <Label htmlFor="excerpt">Excerpt</Label>
-          <Input name="excerpt" value={form.excerpt} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="coverImage">Cover Image URL</Label>
-          <Input name="coverImage" value={form.coverImage} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="tags">Tags (comma-separated)</Label>
-          <Input name="tags" value={form.tags} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="category">Category</Label>
-          <Input name="category" value={form.category} onChange={handleChange} />
-        </div>
-        <div>
-          <Label htmlFor="content">Content</Label>
-          <Textarea name="content" rows={10} value={form.content} onChange={handleChange} required />
-        </div>
-        <Button type="submit">Submit Blog</Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-6 space-y-4">
+      <h1 className="text-2xl font-bold">Submit Blog</h1>
+
+      <input
+        type="text"
+        placeholder="Blog Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="w-full border rounded p-2"
+      />
+
+      <MDEditor
+        value={content}
+        onChange={(val) => setContent(val || '')}
+        commands={[
+          ...Object.values(rawCommands).filter(
+            (cmd): cmd is ICommand =>
+              typeof cmd === 'object' &&
+              !!cmd &&
+              'name' in cmd &&
+              typeof cmd.name === 'string' &&
+              cmd.name !== 'image'
+          ),
+          imageCommand,
+        ]}
+      />
+
+      <input
+        type="text"
+        placeholder="Excerpt"
+        value={excerpt}
+        onChange={(e) => setExcerpt(e.target.value)}
+        className="w-full border rounded p-2"
+      />
+      <input
+        type="text"
+        placeholder="Slug"
+        value={slug}
+        onChange={(e) => setSlug(e.target.value)}
+        className="w-full border rounded p-2"
+      />
+      <input
+        type="text"
+        placeholder="Tags (comma-separated)"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+        className="w-full border rounded p-2"
+      />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setCoverImage(e.target.files?.[0] || null)}
+      />
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        {submitting ? 'Submitting...' : 'Submit Blog'}
+      </button>
+    </form>
   );
 }

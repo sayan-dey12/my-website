@@ -1,0 +1,16 @@
+.prose h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.prose img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+/* Add more styles as needed */

@@ -48,6 +48,8 @@ export async function POST(req: NextRequest) {
         id:user._id,
         email:user.email,
         username:user.username,
+        isAdmin: user.isAdmin,
+        role: user.role, // Assuming you have a role field
     }
 
     //create token
@@ -58,10 +60,11 @@ export async function POST(req: NextRequest) {
             success: true,
         })
     response.cookies.set("token", token, {
-        httpOnly: true, 
-        maxAge: 60 * 60 * 24 * 7,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 7, // 7 days
         path: "/",
-            
     })
         return response;
 

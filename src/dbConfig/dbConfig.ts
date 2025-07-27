@@ -1,28 +1,20 @@
-import mongoose from 'mongoose';
-    let isConnected = false;
+import mongoose from "mongoose";
+
+let isConnected = false;
+
 export async function connectDB() {
-    if (isConnected) return;
+  if (isConnected) return;
 
-    try {
-        mongoose.connect(process.env.MONGO_URI!);
-        const connection = mongoose.connection;
+  try {
+    if (!process.env.MONGO_URI) throw new Error("MONGO_URI not set");
 
-        connection.on('connected', () => {
-            isConnected = true;
-            console.log('MongoDB connected successfully');
-        })
-        
+    const db = await mongoose.connect(process.env.MONGO_URI);
 
-        connection.on('error', (err) => {
-            console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
-            process.exit();
-        })
+    mongoose.connection.setMaxListeners(20); // ✅ Increase listener limit
+    isConnected = true;
 
-    } catch (error) {
-        console.log('Something goes wrong!');
-        console.log(error);
-        
-    }
-
-
+    console.log("✅ MongoDB Connected");
+  } catch (error) {
+    console.error("❌ Error connecting to MongoDB:", error);
+  }
 }
