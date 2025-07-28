@@ -21,8 +21,7 @@ import { Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function LoginInner() {
-  const { setLoggedIn } = useAuth();
-  const [mounted, setMounted] = useState(false);
+  const { setLoggedIn, loggedIn, mounted } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [showResend, setShowResend] = useState(false);
@@ -37,10 +36,14 @@ export default function LoginInner() {
   }, [searchParams]);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (mounted && loggedIn) {
+      router.replace(callbackUrl); // Prevent logged-in users from staying on login
+    }
+  }, [mounted, loggedIn, callbackUrl, router]);
 
-  if (!mounted) return null;
+  if (!mounted || loggedIn) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,11 +55,13 @@ export default function LoginInner() {
     setShowResend(false);
 
     try {
-      const response = await axios.post("/api/auth/login", form);
+      const response = await axios.post("/api/auth/login", form, {
+        withCredentials: true, // ✅ important if cookies are used
+      });
       console.log("Successfully Logged in", response.data);
       setLoggedIn(true);
-      router.push(callbackUrl);
       toast.success("Successfully Logged in!", { duration: 3000 });
+      router.push(callbackUrl);
     } catch (error: any) {
       console.log("Login failed", error.response?.data?.message || error.message);
       if (error.response?.data?.message === "UNVERIFIED_EMAIL") {
