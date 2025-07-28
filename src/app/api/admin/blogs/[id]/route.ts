@@ -4,14 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context:any 
 ) {
-  console.log("Requesting blog id:", params.id);
+  const {id} = context.params;
+  console.log("Requesting blog id:", id);
 
   try {
     await connectDB();
 
-    const blog = await Blog.findById(params.id).populate(
+    const blog = await Blog.findById(id).populate(
       "authorId",
       "username email"
     );
