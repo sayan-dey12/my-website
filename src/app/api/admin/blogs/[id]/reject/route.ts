@@ -2,7 +2,7 @@ import { connectDB } from "@/dbConfig/dbConfig";
 import Blog from "@/models/blogModel";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, context: { params: { id: string } }) {
+export async function POST(req: NextRequest, context: any) {
   const {id} = context.params;
   await connectDB();
 
