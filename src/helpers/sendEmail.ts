@@ -32,12 +32,12 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     const link = `${process.env.DOMAIN}/${route}?token=${rawToken}&id=${userId}`;
 
     const mailOptions = {
-      from: `"Sayan from MySite" <strider0003@gmail.com>`,
+      from: `"Sayan from techwithstrider" <strider0003@gmail.com>`,
       to: email,
       subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: `
         <div style="font-family:sans-serif;">
-          <h2>Welcome to MySite!</h2>
+          <h2>Welcome to techwithstrider!</h2>
           <p>Please click the link below to ${
             emailType === "VERIFY" ? "verify your email" : "reset your password"
           }:</p>

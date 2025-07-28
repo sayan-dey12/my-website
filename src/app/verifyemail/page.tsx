@@ -13,7 +13,7 @@ export default function VerifyEmailPage() {
   useEffect(() => {
     const verifyEmail = async () => {
       if (!token) {
-        toast.error("Token is missing");
+        toast.error("Token is missing", { duration: 3000 });
         return;
       }
 
@@ -22,14 +22,14 @@ export default function VerifyEmailPage() {
         const data = await res.json();
 
         if (res.ok) {
-          toast.success(data.message || "Email verified successfully");
+          toast.success(data.message || "Email verified successfully", { duration: 3000 });
           router.push('/login');
         } else {
-          toast.error(data.message || "Verification failed");
+          toast.error(data.message || "Verification failed", { duration: 3000 });
         }
       } catch (err) {
         console.error("Verification error:", err);
-        toast.error("Something went wrong");
+        toast.error("Something went wrong", { duration: 3000 });
       }
     };
 

@@ -26,13 +26,13 @@ export default function ConnectPage() {
       const data = await res.json();
 
       if (data.success) {
-        toast.success("Thanks! I'll get in touch soon.");
+        toast.success("Thanks! I'll get in touch soon.", { duration: 3000 });
         setEmail("");
       } else {
-        toast.error(data.message || "Something went wrong");
+        toast.error(data.message || "Something went wrong", { duration: 3000 });
       }
     } catch (error) {
-      toast.error("Failed to connect. Try again later.");
+      toast.error("Failed to connect. Try again later.", { duration: 3000 });
       console.error(error);
     } finally {
       setLoading(false);
@@ -62,6 +62,7 @@ export default function ConnectPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="email"
           className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button

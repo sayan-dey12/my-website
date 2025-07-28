@@ -22,12 +22,12 @@ export default function ForgotPasswordPage() {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success(data.message);
+        toast.success(data.message, { duration: 3000 });
       } else {
-        toast.error(data.message);
+        toast.error(data.message, { duration: 3000 });
       }
     } catch (error) {
-      toast.error('Something went wrong.');
+      toast.error('Something went wrong.', { duration: 3000 });
     } finally {
       setLoading(false);
     }
@@ -45,6 +45,7 @@ export default function ForgotPasswordPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete='email'
           />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>

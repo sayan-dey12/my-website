@@ -40,9 +40,9 @@ const imageCommand: ICommand = {
         });
         const data = await res.json();
         api.replaceSelection(`![image](${data.url})`);
-        toast.success('Image uploaded');
+        toast.success('Image uploaded', { duration: 3000 });
       } catch {
-        toast.error('Image upload failed');
+        toast.error('Image upload failed', { duration: 3000 });
       }
     };
   },
@@ -68,7 +68,7 @@ export default function BlogSubmitPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!title || !content || !slug || !excerpt || !coverImage) {
-      toast.error('All fields are required');
+      toast.error('All fields are required', { duration: 3000 });
       return;
     }
 
@@ -90,10 +90,10 @@ export default function BlogSubmitPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Submit failed');
 
-      toast.success('Blog submitted');
+      toast.success('Blog submitted', { duration: 3000 });
       router.push('/blogs'); // ✅ Redirect to blog listing or dashboard
     } catch {
-      toast.error('Submit failed');
+      toast.error('Submit failed', { duration: 3000 });
     } finally {
       setSubmitting(false);
     }

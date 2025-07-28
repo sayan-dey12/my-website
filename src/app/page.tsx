@@ -19,7 +19,7 @@ export default function HomePage() {
 
   const handleComingSoon = (e: React.MouseEvent) => {
     e.preventDefault();
-    toast("🚧 Feature coming soon!");
+    toast("🚧 Feature coming soon!", { duration: 3000 });
   };
   const handleConnect = () => {
   const width = 500;

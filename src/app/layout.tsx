@@ -4,6 +4,7 @@ import Footer from '@/components/footer';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from '@/context/AuthContext';
+import ToasterClient from "@/components/ToasterClient";
 
 
 export const metadata = {
@@ -23,8 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             disableTransitionOnChange
           >
         <Navbar />
-        <div><Toaster/></div>
-
+       <ToasterClient />
        <main className="flex-grow">
       {children}
       </main>

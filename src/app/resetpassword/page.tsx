@@ -28,13 +28,13 @@ export default function ResetPasswordPage() {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success(data.message);
+        toast.success(data.message, { duration: 3000 });
         router.push('/login');
       } else {
-        toast.error(data.message);
+        toast.error(data.message, { duration: 3000 });
       }
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Something went wrong', { duration: 3000 });
     } finally {
       setLoading(false);
     }
@@ -51,6 +51,7 @@ export default function ResetPasswordPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete='new-password'
           />
         </div>
         <Button type="submit" disabled={loading} className="w-full">

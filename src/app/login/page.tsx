@@ -62,14 +62,14 @@ export default function Login() {
       setLoggedIn(true);
       console.log("Callback URL:", callbackUrl);
       router.push(callbackUrl); 
-      toast.success("Successfully Logged in!");
+      toast.success("Successfully Logged in!", { duration: 3000 });
     } catch (error: any) {
       console.log("Login failed", error.response?.data?.message || error.message);
       if (error.response?.data?.message === "UNVERIFIED_EMAIL") {
         setShowResend(true); // ⬅️ Show button
-        toast.error("Please verify your email");
+        toast.error("Please verify your email", { duration: 3000 });
       } else {
-        toast.error(error.response?.data?.message || "Login failed");
+        toast.error(error.response?.data?.message || "Login failed", { duration: 3000 });
       }
     } finally {
       setLoading(false);
@@ -78,17 +78,17 @@ export default function Login() {
 
   const handleResend = async () => {
     if (!form.email) { 
-      return toast.error("Enter your email first");
+      return toast.error("Enter your email first", { duration: 3000 });
     }
 
     try {
-      toast("Resend clicked");
+      toast("Resend clicked", { duration: 3000 });
       const res = await axios.post('/api/resend-verification', { email: form.email });
      console.log("Resend success: ", res.status, res.data);
-     toast.success("Verification email resent");
+     toast.success("Verification email resent", { duration: 3000 });
     } catch (err: any) {
        console.error("Resend error:", err);
-      toast.error(err.response?.data?.message || "Error resending email");
+      toast.error(err.response?.data?.message || "Error resending email", { duration: 3000 });
     }
   };
 
@@ -111,11 +111,11 @@ export default function Login() {
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input type="email" name="email" value={form.email} onChange={handleChange} required />
+                <Input id="email" type="email" name="email" value={form.email} onChange={handleChange} required autoComplete="email" />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input type="password" name="password" value={form.password} onChange={handleChange} required />
+                <Input id="password" type="password" name="password" value={form.password} onChange={handleChange} required autoComplete="new-password" />
               </div>
               <div className="grid gap-1">
                 <a href="/forgot-password" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
