@@ -1,15 +1,24 @@
 // src/app/api/blogs/[slug]/route.ts
 import { connectDB } from "@/dbConfig/dbConfig";
 import Blog from "@/models/blogModel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+type Context = {
+  params: {
+    slug: string;
+  };
+};
 
 export async function GET(
-  req: Request,
-  { params }: { params: { slug: string } }
+  req: NextRequest,
+  context: Context 
 ) {
+  
   await connectDB();
+  const { slug } = context.params;
 
-  const blog = await Blog.findOne({ slug: params.slug });
+
+  const blog = await Blog.findOne({ slug: slug });
 
   if (!blog) {
     return NextResponse.json(
