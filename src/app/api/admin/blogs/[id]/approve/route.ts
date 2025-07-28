@@ -2,11 +2,12 @@ import { connectDB } from "@/dbConfig/dbConfig";
 import Blog from "@/models/blogModel";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, context: { params: { id: string } }) {
+  const { id } = context.params;
   await connectDB();
 
   try {
-    const blog = await Blog.findById(params.id);
+    const blog = await Blog.findById(id);
 
     if (!blog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });
