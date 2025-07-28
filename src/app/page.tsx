@@ -21,6 +21,19 @@ export default function HomePage() {
     e.preventDefault();
     toast("🚧 Feature coming soon!");
   };
+  const handleConnect = () => {
+  const width = 500;
+  const height = 600;
+  const left = (window.innerWidth - width) / 2;
+  const top = (window.innerHeight - height) / 2;
+
+  window.open(
+    "/connect",
+    "ConnectWindow",
+    `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`
+  );
+};
+
 
   useEffect(() => {
     fetch("/api/blogs/latest")
@@ -33,9 +46,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="w-full px-4 sm:px-6 max-w-6xl mx-auto">
+    <main className="w-full px-4 sm:px-6 max-w-7xl mx-auto">
       {/* Hero Section */}
-      <section className="grid md:grid-cols-2 items-center gap-8 md:gap-20 py-16">
+      <section className="grid md:grid-cols-2 items-center gap-10 py-16">
         {/* Left side - About me */}
         <div className="w-full px-2 sm:px-4">
           <div className="space-y-6 text-center md:text-left break-words">
@@ -59,11 +72,12 @@ export default function HomePage() {
                 Projects
               </button>
               <button
-                onClick={handleComingSoon}
-                className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition"
+                onClick={handleConnect}
+                className="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition"
               >
-                Start Video Call
+                Connect with Me
               </button>
+
               <Link
                 href="/blogs"
                 className="bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 transition"
@@ -75,8 +89,10 @@ export default function HomePage() {
         </div>
 
         {/* Right side - Icon Cloud */}
-        <div className="w-full max-w-full">
-          <IconCloudDemo />
+        <div className="w-full max-w-full flex justify-center md:justify-end">
+          <div className="w-[250px] sm:w-[300px] md:w-[350px]">
+            <IconCloudDemo />
+          </div>
         </div>
       </section>
 
