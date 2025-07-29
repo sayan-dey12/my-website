@@ -62,7 +62,7 @@ export default function LoginInner() {
       setLoggedIn(true);
       toast.success("Successfully Logged in!", { duration: 3000 });
       setTimeout(() => {
-        router.push(callbackUrl);
+        window.location.href = callbackUrl;
       }, 200); // Wait for state to propagate
     } catch (error: any) {
       console.log("Login failed", error.response?.data?.message || error.message);
