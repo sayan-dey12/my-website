@@ -45,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
               <meta name="google-site-verification" content="4Lpav6jpVRVtTbQDoHUjTgd4yeVPSScXYgc4pCmridE" />
+              <meta name="msvalidate.01" content="0C04C46F043F2DB19A97267E3D33D321" />
       </head>
       <body className="bg-white dark:bg-black text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
         <AuthProvider>
