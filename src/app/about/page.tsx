@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { FaGithub, FaXTwitter, FaInstagram } from "react-icons/fa6";
 
 export const metadata = {
   title: 'About | Sayan Dey (Strider)',
@@ -32,15 +35,15 @@ export default function AboutPage() {
 
       <section>
         <h2 className="text-2xl font-semibold mb-4 text-center">Find Me Online</h2>
-        <div className="flex justify-center gap-6 text-blue-600 underline text-lg">
+        <div className="flex justify-center gap-8 text-2xl text-gray-700 dark:text-gray-300">
           <Link href="https://github.com/sayan-dey12" target="_blank" rel="noopener noreferrer">
-            GitHub
+            <FaGithub className="hover:text-black dark:hover:text-white transition" />
           </Link>
-          <Link href="https://twitter.com/sayan_dey12" target="_blank" rel="noopener noreferrer">
-            Twitter / X
+          <Link href="https://x.com/sayan_dey12" target="_blank" rel="noopener noreferrer">
+            <FaXTwitter className="hover:text-blue-600 transition" />
           </Link>
           <Link href="https://www.instagram.com/sayan_.dey_/#" target="_blank" rel="noopener noreferrer">
-            Instagram
+            <FaInstagram className="hover:text-pink-600 transition" />
           </Link>
         </div>
       </section>

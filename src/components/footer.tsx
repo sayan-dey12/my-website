@@ -36,11 +36,7 @@ export default function Footer() {
       </div>
 
       <p className="text-sm text-center text-gray-500 dark:text-gray-400">
-        Curious to know more?{" "}
-        <Link href="/about" className="underline text-blue-600 hover:text-blue-800">
-          Visit the About page
-        </Link>
-        .
+        Curious to know more? <Link href="/about" className="underline">About</Link>
       </p>
     </footer>
   );
