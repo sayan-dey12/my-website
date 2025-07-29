@@ -23,19 +23,20 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    setLoading(true);
-    try {
-      await fetch("/api/auth/logout");
-      toast.success("Logged out");
-      setLoggedIn(false);
-      router.push("/login");
-    } catch (error) {
-      console.log("Logout failed", error);
-      toast.error("Logout failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    await fetch("/api/auth/logout", { credentials: "include" });
+    toast.success("Logged out");
+    setLoggedIn(false);
+    window.location.href = "/"; // ✅ Reloads and reruns middleware, fixes access
+  } catch (error) {
+    console.log("Logout failed", error);
+    toast.error("Logout failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleComingSoon = () => {
     toast("🚧 Feature coming soon!");

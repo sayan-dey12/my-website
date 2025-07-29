@@ -61,7 +61,9 @@ export default function LoginInner() {
       console.log("Successfully Logged in", response.data);
       setLoggedIn(true);
       toast.success("Successfully Logged in!", { duration: 3000 });
-      router.push(callbackUrl);
+      setTimeout(() => {
+        router.push(callbackUrl);
+      }, 200); // Wait for state to propagate
     } catch (error: any) {
       console.log("Login failed", error.response?.data?.message || error.message);
       if (error.response?.data?.message === "UNVERIFIED_EMAIL") {
