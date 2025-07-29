@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-center py-6 text-sm text-gray-500 dark:text-gray-300">
+    <footer className="bg-gray-100 dark:bg-gray-800 text-center py-6 text-sm text-gray-500 dark:text-gray-300 space-y-4">
       <p>© {new Date().getFullYear()} Sayan Dey. All rights reserved.</p>
 
-      <div className="mt-3 flex justify-center space-x-5 text-lg">
+      <div className="flex justify-center space-x-5 text-lg">
         <Link
           href="https://github.com/sayan-dey12"
           target="_blank"
@@ -34,6 +34,14 @@ export default function Footer() {
           <FaXTwitter />
         </Link>
       </div>
+
+      <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+        Curious to know more?{" "}
+        <Link href="/about" className="underline text-blue-600 hover:text-blue-800">
+          Visit the About page
+        </Link>
+        .
+      </p>
     </footer>
   );
 }

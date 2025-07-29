@@ -8,9 +8,10 @@ import ToasterClient from "@/components/ToasterClient";
 
 
 export const metadata = {
-  title: "Sayan's Portfolio",
-  description: "Blog, Projects, and Video Call Platform",
+  title: 'Sayan Dey | TechWithStrider | Developer Portfolio',
+  description: 'Official website of Sayan Dey aka Strider — a full-stack developer and student exploring AI, web dev, and blogging at TechWithStrider.',
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

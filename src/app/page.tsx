@@ -53,8 +53,9 @@ export default function HomePage() {
         <div className="w-full px-2 sm:px-4">
           <div className="space-y-6 text-center md:text-left break-words">
             <h1 className="text-3xl sm:text-5xl font-bold leading-tight">
-              Hi, I'm <span className="text-blue-600">Sayan</span> 👋
+              Hi, I'm <span className="text-blue-600">Sayan Dey</span> aka Strider 👋
             </h1>
+
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300">
               I'm a passionate <strong>student</strong> and dedicated <strong>learner</strong> on a journey through
               <span className="text-blue-600 font-medium"> full-stack development</span>,
@@ -126,6 +127,12 @@ export default function HomePage() {
             ))}
           </div>
         )}
+        <div>
+          <p className="text-sm text-center text-gray-500 mt-4">
+             TechWithStrider is my personal blog and portfolio website. I'm Sayan Dey (Strider), a full-stack developer and student building in public with AI, web technologies, and open source.
+          </p>
+
+        </div>
 
         {/* CTA: Write a Blog */}
         <div className="mt-20 text-center border-t pt-10">

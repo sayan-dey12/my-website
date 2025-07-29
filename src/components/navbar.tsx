@@ -85,6 +85,7 @@ export default function Navbar() {
           <Link href="/blogs" className="block" onClick={() => setMenuOpen(false)}>Blogs</Link>
           <button onClick={() => { handleComingSoon(); setMenuOpen(false); }} className="block">Projects</button>
           <button onClick={() => { handleComingSoon(); setMenuOpen(false); }} className="block">Video Call</button>
+           <Link href="/about" className="block" onClick={() => setMenuOpen(false)}>About</Link>
 
           {!loggedIn ? (
             <Link href={`/login?callbackUrl=${encodeURIComponent(pathname)}`} onClick={() => setMenuOpen(false)}>
