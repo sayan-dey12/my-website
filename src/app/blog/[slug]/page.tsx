@@ -55,9 +55,12 @@ export default async function SingleBlogPage({ params }: Props) {
 
       {/* Blog Content */}
       <div
-        className="prose max-w-none transition duration-300 [&_img]:w-full [&_img]:max-w-[500px] [&_img]:mx-auto [&_img]:rounded-lg"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
+  className="prose max-w-none transition duration-300
+    [&_img]:w-full [&_img]:max-w-[500px] [&_img]:mx-auto [&_img]:rounded-lg
+    [&_pre]:overflow-x-auto [&_pre]:bg-gray-100 dark:[&_pre]:bg-gray-800 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:text-sm
+    [&_code]:break-words"
+  dangerouslySetInnerHTML={{ __html: htmlContent }}
+/>
 
       {/* Author Name */}
       <p className="mt-10 text-sm text-gray-500 italic text-right">Written by {authorName}</p>
