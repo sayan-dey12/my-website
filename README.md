@@ -1,45 +1,59 @@
+# 🌐 My Personal Full-Stack Website
 
-<<<<<<< HEAD
-# my-website
-=======
->>>>>>> 9f88d4b (initial app design is ready , user authentication)
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is my **personal website** built using **Next.js 14** and **TypeScript**.  
+It includes features like **blog publishing**, **user authentication**, **admin moderation**, **email collection**, and a clean developer portfolio.
 
-## Getting Started
+> 🎯 Built to showcase my projects, publish blog posts, and offer tools like email subscriptions and real-time interactions.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[🔗 Visit My Website](https://techwithstrider.vercel.app/)  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧰 Tech Stack
 
-## Learn More
+| Layer        | Tech Used |
+|--------------|-----------|
+| **Framework** | Next.js 14 (App Router) |
+| **Language** | TypeScript |
+| **UI Library** | Tailwind CSS + Shadcn/UI |
+| **Database** | MongoDB Atlas |
+| **Auth** | JWT with HttpOnly cookies |
+| **Cloud Storage** | Cloudinary |
+| **Email** | Email verification  |
+| **Markdown** | Editor with image upload |
+| **Deployment** | Vercel |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 📝 **Blog System**
+  - Markdown editor with image upload
+  - Slug generation, tags, excerpt, cover image
+  - Admin dashboard for blog approval
 
-## Deploy on Vercel
+- 👤 **Authentication**
+  - Register/login with email & password
+  - Email verification system
+  - Forgot/reset password flow
+  - Protected routes via middleware
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 📬 **Connect With Me Page**
+  - Simple email capture form
+  - Stored in backend for future use
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-<<<<<<< HEAD
-=======
->>>>>>> 16d4b3c (initial app design is ready , user authentication is completed , blog page design is semi completed ,  Signup/Login with JWT & cookies, Email verification,)
->>>>>>> 9f88d4b (initial app design is ready , user authentication)
+- 🧑‍💼 **Admin Dashboard**
+  - Approve or reject submitted blog posts
+  - View pending submissions
+
+- 💡 **Developer Portfolio Sections**
+  - Showcase of projects
+  - Future integration of AI tools and personal utilities
+
+- 📱 **Fully Responsive UI**
+
+---
