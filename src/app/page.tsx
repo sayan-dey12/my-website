@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { FaBlog, FaCode, FaEnvelope, FaTools } from "react-icons/fa";
+import TechStackGrid from "@/components/TechStackGrid";
+
 
 type Blog = {
   _id: string;
@@ -128,7 +130,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="grid md:grid-cols-3 gap-8 mt-20">
+      <section className="grid md:grid-cols-3 gap-8 mt-10">
         <Card className="shadow-lg rounded-2xl">
           <CardContent className="flex flex-col items-center text-center p-6">
             <FaBlog className="text-4xl text-blue-500 mb-4" />
