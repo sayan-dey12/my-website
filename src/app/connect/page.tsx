@@ -26,11 +26,12 @@ export default function ConnectPage() {
       const data = await res.json();
 
       if (data.success) {
-        toast.success("Thanks! I'll get in touch soon.", { duration: 3000 });
+        toast.success(data.message, { duration: 3000 });
         setEmail("");
       } else {
         toast.error(data.message || "Something went wrong", { duration: 3000 });
       }
+
     } catch (error) {
       toast.error("Failed to connect. Try again later.", { duration: 3000 });
       console.error(error);

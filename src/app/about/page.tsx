@@ -3,61 +3,114 @@ import { FaGithub, FaXTwitter, FaInstagram, FaLinkedin } from "react-icons/fa6";
 
 export const metadata = {
   title: "About | Sayan Dey (Strider)",
-  description: "Learn more about Sayan Dey aka Strider — a passionate student, developer, and creator of TechWithStrider.",
+  description:
+    "Know more about Sayan Dey aka Strider — a passionate full-stack developer, AI learner, and builder of TechWithStrider, on a mission to create impactful, intelligent, and scalable digital products.",
 };
 
 export default function AboutPage() {
   return (
-    <main className="max-w-5xl mx-auto px-4 py-16 space-y-16">
+    <main className="max-w-6xl mx-auto px-6 py-24 space-y-28">
       {/* Hero */}
-      <section className="text-center">
-        <h1 className="text-4xl font-extrabold mb-4">About Me</h1>
-        <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-          Hi, I’m <strong>Sayan Dey</strong> (aka <strong>Strider</strong>). A curious student and developer
-          passionate about <span className="font-medium">full-stack development</span>, 
-          <span className="font-medium"> AI</span>, and <span className="font-medium">open source</span>.
+      <section className="text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 bg-clip-text text-transparent leading-tight">
+          Hey, I’m Sayan Dey 👋
+        </h1>
+        <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Also known as <strong>Strider</strong> — a developer, learner, and creator passionate about
+          exploring how technology and intelligence can work together to build the future.
         </p>
       </section>
 
-      {/* Story */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-center">My Journey</h2>
-        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-center max-w-3xl mx-auto">
-          I started coding as a hobby and turned it into a journey of building products, contributing
-          to open-source, and writing blogs to share what I learn. <br />
+      {/* Identity */}
+      <section className="space-y-8 text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold">Who Am I?</h2>
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
+          I’m a student developer and a lifelong learner who loves turning complex ideas into elegant
+          systems. My focus lies at the intersection of <strong>full-stack development, AI, and DevOps</strong> —
+          the core technologies that power today’s most advanced products.
           <br />
-          <span className="font-medium">TechWithStrider</span> is my personal learning lab — a space to
-          explore, experiment, and grow.
+          <br />
+          I’m fascinated by how things work behind the scenes — from the low-level logic that makes
+          code efficient to the architecture that makes apps scalable. My long-term goal is to grow
+          into a <strong>technically strong founder</strong> — capable of designing, developing, and deploying
+          complete products from scratch with precision and creativity.
+        </p>
+      </section>
+
+      {/* Vision */}
+      <section className="space-y-8 text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold">My Vision</h2>
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
+          My goal is to blend <strong>technology, creativity, and systems thinking</strong> to create tools
+          and experiences that simplify people’s lives. I believe in the power of small, consistent
+          progress — every project, every experiment, and every bug fixed is a step toward mastery.
+          <br />
+          <br />
+          Through <span className="font-medium">TechWithStrider</span>, I document my journey — learning modern
+          engineering, experimenting with AI, and exploring DevOps and scalability — not just to
+          build skills, but to build things that matter.
         </p>
       </section>
 
       {/* Tech Stack */}
-      <section>
-        <h2 className="text-2xl font-semibold text-center mb-6">My Tech Stack</h2>
-        <ul className="flex flex-wrap justify-center gap-3 text-sm">
+      <section className="text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold mb-10">My Tech Stack</h2>
+        <ul className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
           {[
-            "JavaScript / TypeScript",
+            "TypeScript / JavaScript",
             "React / Next.js",
-            "Node.js / Express",
-            "MongoDB / Redis",
-            "Docker / GitHub Actions",
-            "LangChain / Python / AI",
+            "Node.js / Express / REST / GraphQL",
+            "MongoDB / PostgreSQL / Redis",
+            "Docker / Linux / GitHub Actions / CI-CD",
+            "LangChain / OpenAI / Python / Machine Learning / AI",
+            "Golang (Learning) / DevOps / Cloud Infrastructure",
           ].map((tech) => (
-            <li key={tech} className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+            <li
+              key={tech}
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md hover:shadow-lg transition-shadow"
+            >
               {tech}
             </li>
           ))}
         </ul>
       </section>
 
-      {/* Socials */}
-      <section className="text-center">
-        <h2 className="text-2xl font-semibold mb-6">Find Me Online</h2>
-        <div className="flex justify-center gap-8 text-2xl">
-          <Link href="https://github.com/sayan-dey12" target="_blank"><FaGithub className="hover:text-black dark:hover:text-white transition" /></Link>
-          <Link href="https://x.com/sayan_dey12" target="_blank"><FaXTwitter className="hover:text-blue-600 transition" /></Link>
-          <Link href="https://www.instagram.com/sayan_.dey_" target="_blank"><FaInstagram className="hover:text-pink-600 transition" /></Link>
-          <Link href="https://www.linkedin.com/in/sayan-dey-b37843378/" target="_blank"><FaLinkedin className="hover:text-blue-700 transition" /></Link>
+      {/* Connect */}
+      <section className="text-center space-y-6">
+        <h2 className="text-2xl md:text-3xl font-semibold">Let’s Connect</h2>
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          I love connecting with fellow developers, creators, and curious learners. If you’re building
+          something exciting or just want to talk tech, feel free to reach out.
+        </p>
+        <div className="flex justify-center gap-10 text-2xl md:text-3xl mt-4">
+          <Link
+            href="https://github.com/sayan-dey12"
+            target="_blank"
+            className="hover:text-black dark:hover:text-white transition"
+          >
+            <FaGithub />
+          </Link>
+          <Link
+            href="https://x.com/sayan_dey12"
+            target="_blank"
+            className="hover:text-blue-500 transition"
+          >
+            <FaXTwitter />
+          </Link>
+          <Link
+            href="https://www.instagram.com/sayan_.dey_"
+            target="_blank"
+            className="hover:text-pink-500 transition"
+          >
+            <FaInstagram />
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/sayan-dey-b37843378/"
+            target="_blank"
+            className="hover:text-blue-600 transition"
+          >
+            <FaLinkedin />
+          </Link>
         </div>
       </section>
     </main>
